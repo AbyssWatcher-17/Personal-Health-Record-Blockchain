@@ -15,9 +15,10 @@ protected:
 public:
     Record(const std::string& id);
     virtual void display() const = 0; // Pure virtual for polymorphism
-    virtual void asyncDisplay(const Record* record) = 0; 
+    //virtual void asyncDisplay(const Record* record) = 0; 
     virtual ~Record() = 0; // Pure virtual destructor
     std::string generateTimestamp();
+    std::string getId();
 };
 
 

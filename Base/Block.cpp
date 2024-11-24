@@ -1,32 +1,26 @@
 #include "Block.h"
+#include <iostream>
+#include <utility> // For std::move
 
+// Constructor to initialize a Block with a record and previous hash
+Block::Block(std::unique_ptr<Record> rec, const std::string& prevHash)
+    : record(std::move(rec)), previousHash(prevHash), currentHash(calculateHash()) {}
 
-    Block::Block(const std::string& prevHash) : previousHash(prevHash) {}
+// Calculate a simple hash for demonstration purposes
+std::string Block::calculateHash() const {
+    // Simplified hash calculation for demonstration
+    return previousHash + (record ? record->getId() : "");
+}
 
-    void Block::addRecord(Record* record) {
-        std::lock_guard<std::mutex> lock(mtx);
-        records.push_back(record);
-    }
+const std::string& Block::getPreviousHash() const {
+    return previousHash;
+}
 
-    void Block::computeHash() {
-        std::lock_guard<std::mutex> lock(mtx);
-        std::thread hashThread([this]() {
-            std::string combinedData;
-            for (const auto& record : records) {
-                combinedData += record->generateTimestamp();
-                
-            }
-            blockHash = std::to_string(std::hash<std::string>{}(combinedData + previousHash));
-        });
-        hashThread.join();
-    }
+const std::string& Block::getCurrentHash() const {
+    return currentHash;
+}
 
-    void Block::displayRecords() const {
-        std::lock_guard<std::mutex> lock(mtx);
-        for (const auto& record : records) {
-            record->display();
-        }
-    }
-
-
-
+const Record* Block::getRecord() const {
+    record->display();
+    return record.get();
+}

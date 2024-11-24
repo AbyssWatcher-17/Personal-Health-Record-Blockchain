@@ -9,24 +9,33 @@
 
 class Block {
     std::string previousHash;
-    std::vector<Record*> records;
+    std::string currentHash;
+    //std::vector<Record*> records;
+    std::unique_ptr<Record> record;  // Each block holds a unique record
+
     std::string blockHash;
     mutable std::mutex mtx;
+    std::string calculateHash() const;
 
 public:
-    Block(const std::string& prevHash);
+        // Constructor to create a Block with a Record and the previous hash
+    Block(std::unique_ptr<Record> rec, const std::string& prevHash);
 
     void addRecord(Record* record);
 
     void computeHash();
 
-    void displayRecords() const;
+    //void displayRecords() const;
+    
+    const std::string& getCurrentHash() const;
+    const std::string& getPreviousHash() const;
+    const Record* getRecord() const;
 
     // Move assignment operator
     Block& operator=(Block&& other) noexcept {
         if (this != &other) {
             previousHash = std::move(other.previousHash);
-            records = std::move(other.records);
+            record = std::move(other.record);
             blockHash = std::move(other.blockHash);
             // Mutex remains in place
         }
@@ -35,7 +44,7 @@ public:
 
     // Move constructor
     Block(Block&& other) noexcept : previousHash(std::move(other.previousHash))
-        , records(std::move(other.records))
+        , record(std::move(other.record))
         , blockHash(std::move(other.blockHash)) {
         // Mutex can't be moved, but it's okay as it's default constructed
     }

@@ -13,6 +13,9 @@ public:
 
     void addBlock(Block& newBlock);
 
+    void addBlock(Block&& block);
+
+    std::string getLatestBlockHash();
     void displayChain() const;
 };
 

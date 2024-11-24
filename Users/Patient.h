@@ -10,6 +10,7 @@ public:
     void accessRecord(const Record* record) const override;
     void asyncDisplay(const Record* record) const override;
     virtual ~Patient() override = default;
+    std::string getName() const override;
 };
 
 #endif

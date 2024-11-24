@@ -12,3 +12,8 @@ std::string Record::generateTimestamp() {
 Record::Record(const std::string& id) : recordId(id), timestamp(generateTimestamp()){};
 
 Record::~Record() {}
+
+std::string Record::getId()
+{
+    return recordId;
+}

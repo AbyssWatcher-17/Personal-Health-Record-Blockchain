@@ -13,6 +13,11 @@ void Patient::accessRecord(const Record* record) const {
     }
 }
 
+std::string Patient::getName() const
+{
+    return name;
+}
+
 void Patient::asyncDisplay(const Record* record)  const {
     std::thread displayThread([record]() {
         record->display();
