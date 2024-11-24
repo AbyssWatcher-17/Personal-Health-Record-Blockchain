@@ -22,7 +22,7 @@ public:
 
     void displayRecords() const;
 
-            // Move assignment operator
+    // Move assignment operator
     Block& operator=(Block&& other) noexcept {
         if (this != &other) {
             previousHash = std::move(other.previousHash);
@@ -33,7 +33,7 @@ public:
         return *this;
     }
 
-        // Move constructor
+    // Move constructor
     Block(Block&& other) noexcept : previousHash(std::move(other.previousHash))
         , records(std::move(other.records))
         , blockHash(std::move(other.blockHash)) {

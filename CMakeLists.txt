@@ -12,6 +12,8 @@ set(SOURCES
     Base/Record.cpp
     Users/Doctor.cpp
     Users/Patient.cpp
+    Records/DoctorRecord.cpp
+    Records/PatientRecord.cpp
 )
 
 

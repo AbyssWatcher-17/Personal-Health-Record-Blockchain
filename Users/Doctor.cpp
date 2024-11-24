@@ -23,9 +23,9 @@
 
     void Doctor::saveRecord(const Record* record)
     {
-    if (record) {
-        std::cout << "Doctor " << name << " saving record\n";
-    }
+        if (record) {
+            std::cout << "Doctor " << name << " saving record\n";
+        }
     }
 
     const char* Doctor::getSpecialtyName(MedicalSpecialty specialty) {

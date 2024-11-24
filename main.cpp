@@ -20,10 +20,14 @@ int main(int argc, char const *argv[])
     // Create a block
     Block block("0");
     
+    
     // Add the block to the chain
     blockchain.addBlock(block);
     
     std::cout << "Blockchain initialized successfully\n";
+
+
+    //Continue the 
     
     return 0;
 }
